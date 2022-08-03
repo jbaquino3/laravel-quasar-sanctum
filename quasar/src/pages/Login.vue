@@ -40,19 +40,38 @@
 
 <script>
     import { defineComponent, reactive, toRefs } from 'vue'
-    import { api } from 'boot/axios'
+    import { useAuthStore } from 'stores/auth'
+    import { useQuasar } from 'quasar'
 
     export default defineComponent({
         name: 'IndexPage',
 
         setup() {
+            const authStore = useAuthStore()
+            const $q = useQuasar()
+
             const form = reactive({
                 email: '',
                 password: ''
             })
 
-            const submitForm = () => {
-                api.post("/api/login", form)
+            const submitForm = async () => {
+                const res = await authStore.login(form)
+                if(res.status) {
+                    $q.notify({
+                        color: 'positive',
+                        position: 'top',
+                        message: 'Login successful.',
+                        icon: 'report_problem'
+                    })
+                } else {
+                    $q.notify({
+                        color: 'negative',
+                        position: 'top',
+                        message: res.error,
+                        icon: 'report_problem'
+                    })
+                }
             }
 
             return {...toRefs(form), submitForm}

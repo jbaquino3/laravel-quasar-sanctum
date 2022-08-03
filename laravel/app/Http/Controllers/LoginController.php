@@ -17,10 +17,6 @@ class LoginController extends Controller {
             return response($user, 200);
         }
  
-        return [
-            'errors' => [
-                'email' => 'The provided credentials do not match our records.'
-            ]
-        ];
+        return response()->json(["message" => "Incorrect password."], 401);
     }
 }
