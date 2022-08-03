@@ -1,5 +1,5 @@
 <template>
-	<q-btn @click="login">Login</q-btn>
+	<q-btn @click="getUser">Get User</q-btn>
 </template>
 
 <script>
@@ -22,6 +22,10 @@
 				api.post("/api/login", form)
 			}
 
+			const getUser = () => {
+				api.get("/api/user")
+			}
+
 			api.get("/sanctum/csrf-cookie").then(() => {login()})
 			.catch(() => {
 				$q.notify({
@@ -32,7 +36,7 @@
 				})
 			})
 
-			return {login}
+			return {getUser}
 		}
 	})
 </script>
