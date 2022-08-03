@@ -16,11 +16,10 @@
 
 			authStore.csrf()
 			authStore.getUser().then(user => {
-				if(!user) {
+				if(!user.status) {
 					router.push("/login")
 				}
 			})
-
 
 			return {}
 		}
