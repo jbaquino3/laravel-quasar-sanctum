@@ -1,5 +1,5 @@
 <template>
-	<q-btn @click="getUser">Get User</q-btn>
+	<router-view></router-view>
 </template>
 
 <script>
