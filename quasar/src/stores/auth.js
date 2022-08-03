@@ -12,6 +12,15 @@ export const useAuthStore = defineStore('counter', {
     },
 
     actions: {
+        async getUser() {
+            const res = await api.get('/api/user')
+            return res.data
+        },
+
+        async csrf() {
+            await api.get("/sanctum/csrf-cookie")
+        },
+
         async login(form) {
             var error  = null
 
