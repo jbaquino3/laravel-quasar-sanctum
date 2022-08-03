@@ -1,5 +1,5 @@
 <template>
-	<router-view />
+	<q-btn @click="login">Login</q-btn>
 </template>
 
 <script>
@@ -13,7 +13,17 @@
 		setup() {
 			const $q = useQuasar()
 
-			api.get("/sanctum/csrf-cookie").catch(() => {
+			const form = {
+				email: "test@example.com",
+				password: "password"
+			}
+
+			const login = () => {
+				api.post("/api/login", form)
+			}
+
+			api.get("/sanctum/csrf-cookie").then(() => {login()})
+			.catch(() => {
 				$q.notify({
 					color: 'negative',
 					position: 'top',
@@ -21,6 +31,8 @@
 					icon: 'report_problem'
 				})
 			})
+
+			return {login}
 		}
 	})
 </script>
