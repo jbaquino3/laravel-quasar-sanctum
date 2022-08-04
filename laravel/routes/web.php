@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\LoginController;
+use App\Http\Controllers\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,4 +18,5 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::post('api/login', [LoginController::class, 'authenticate']);
+Route::post('api/login', [AuthController::class, 'authenticate']);
+Route::post('api/register', [AuthController::class, 'register']);
