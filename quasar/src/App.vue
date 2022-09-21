@@ -15,8 +15,8 @@
 			const router = useRouter()
 
 			authStore.csrf()
-			authStore.getUser().then(user => {
-				if(!user.status) {
+			authStore.getUser().then(res => {
+				if(!res.status) {
 					router.push("/login")
 				}
 			})

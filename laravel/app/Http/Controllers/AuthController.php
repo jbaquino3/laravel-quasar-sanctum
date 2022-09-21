@@ -28,14 +28,14 @@ class AuthController extends Controller {
             'password' => ['required'],
         ]);
 
-        if($request->confirmation != $form->password) {
+        if($request->confirmation != $form["password"]) {
             return response()->json(["message" => "Passwords do not match."], 422);
         }
 
         $user = User::create([
-            "name" => $form->name,
-            "email" => $form->email,
-            "password" => \Hash::make($form->password)
+            "name" => $form["name"],
+            "email" => $form["email"],
+            "password" => \Hash::make($form["password"])
         ]);
 
         if(!$user) {

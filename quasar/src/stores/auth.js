@@ -13,8 +13,7 @@ export const useAuthStore = defineStore('counter', {
 
     actions: {
         async getUser() {
-            const res = await authApi.user()
-            return res.data
+            return await authApi.user()
         },
 
         async csrf() {
@@ -22,12 +21,20 @@ export const useAuthStore = defineStore('counter', {
         },
 
         async login(form) {
-            var error  = null
-
             const res = await authApi.login(form)
             if(res.status) {
                 this.user = res.data
                 this.token = res.data.token
+            }
+
+            return res
+        },
+
+        async register(form) {
+            const res = await authApi.register(form)
+            if(res.status) {
+                const authStore = useAuthStore()
+                await authStore.login(form)
             }
 
             return res

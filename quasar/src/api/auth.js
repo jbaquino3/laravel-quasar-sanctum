@@ -4,6 +4,10 @@ export const login = async (data) => {
     return await _post("/api/login", data)
 }
 
+export const register = async (data) => {
+    return await _post("/api/register", data)
+}
+
 export const user = async () => {
     return await _get("/api/user")
 }

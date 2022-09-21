@@ -24,7 +24,7 @@
                         <q-input label="Name" v-model="name"></q-input>
                         <q-input label="Username" v-model="email"></q-input>
                         <q-input label="Password" type="password" v-model="password"></q-input>
-                        <q-input label="Repeat Password" type="confirmation" v-model="confirmation"></q-input>
+                        <q-input label="Repeat Password" type="password" v-model="confirmation"></q-input>
 
                         <div>
                             <q-btn class="full-width" color="primary" label="Register" type="submit" rounded></q-btn>
@@ -59,7 +59,7 @@
             })
 
             const submitForm = async () => {
-                const res = await authStore.login(form)
+                const res = await authStore.register(form)
                 if(res.status) {
                     $q.notify({
                         color: 'positive',
